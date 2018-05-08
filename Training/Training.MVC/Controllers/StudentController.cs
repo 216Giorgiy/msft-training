@@ -1,4 +1,5 @@
 ﻿using Data;
+using Mvc.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -44,8 +45,8 @@ namespace Mvc.Controllers
             retVal = JsonConvert.DeserializeObject<Student>(response, new JsonSerializerSettings {
                 NullValueHandling = NullValueHandling.Ignore
             });
-
-            return View(retVal);
+            var item = new StudentViewModel() { Name = retVal.Name, Id = retVal.Id };
+            return View(item);
         }
 
         [HttpPost]

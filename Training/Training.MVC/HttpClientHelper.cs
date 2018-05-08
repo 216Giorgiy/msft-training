@@ -14,7 +14,6 @@ namespace Mvc {
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var error = default(Exception);
             try {
                 if (method == HttpMethod.Get) {
