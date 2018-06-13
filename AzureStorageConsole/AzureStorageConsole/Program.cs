@@ -17,17 +17,17 @@ namespace AzureStorageConsole {
         static void UploadFile() {
 
             CloudStorageAccount storageAccount = null;
-            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=storagetraining02;AccountKey=G8DWbjxZrQ0Fh25UhkHQaw4tRCkT1ttwCzQEKfblym5pI0gRa+43pZqyqy980tIQYl5mJMLIssZYb3dDCPoPRA==;EndpointSuffix=core.windows.net";
+            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=functionaction89d3;AccountKey=A/n6F2247fCMwKLtjml69PH5tlm51bCfe3o/I0hpV371Tf6PjFkHguScMTo5+Y9kolfI9bQdcrEcKJoS2apmAQ==;EndpointSuffix=core.windows.net";
 
 
             if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount)) {
-                CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = cloudBlobClient.GetContainerReference("test");
-                container.CreateIfNotExists();
+                //CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
+                //CloudBlobContainer container = cloudBlobClient.GetContainerReference("test");
+                //container.CreateIfNotExists();
 
 
-                CloudBlockBlob cloudBlockBlob = container.GetBlockBlobReference("configfile/training.config");
-                cloudBlockBlob.UploadFromFile("C:\\AzureStorageConsole.exe.config");
+                //CloudBlockBlob cloudBlockBlob = container.GetBlockBlobReference("configfile/training.config");
+                //cloudBlockBlob.UploadFromFile("D:\\Source\\Training\\msft-training\\AzureStorageConsole\\AzureStorageConsole\\App.config");
 
                 CloudTableClient client = storageAccount.CreateCloudTableClient();
                 CloudTable table = client.GetTableReference("table");
@@ -35,8 +35,9 @@ namespace AzureStorageConsole {
 
                 Training trainingitem = new Training();
                 trainingitem.PartitionKey = "2";
-                trainingitem.RowKey = "3";
+                trainingitem.RowKey = "4";
                 trainingitem.TrainingTest = "TrainingTest";
+                trainingitem.Naam = "Naam";
 
                 TableOperation operation = TableOperation.Insert(trainingitem);
                 table.Execute(operation);

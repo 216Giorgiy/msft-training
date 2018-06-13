@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "clustername": {
+      "value": "mpnakscluster"
+    },
+    "dnsPrefix": {
+      "value": "akscluster"
+    },
+    "agentCount": {
+      "value": 2
+    },
+    "agentVMSize": {
+      "value": "Standard_D2_v2"
+    },
+    "servicePrincipalClientId": {
+      "value": "ff73084d-c3b5-463b-9459-0cf3fa639854"
+    },
+    "servicePrincipalClientSecret": {
+      "value": "wyzk5qevsFTCpy9jeZS4I9dQ9amvlUjDa1Qp8opiY28="
+    },
+    "kubernetesVersion": {
+      "value": "1.9.6"
+    },
+    "workspaceName": {
+      "value": "mpn-oms-01"
+    },
+    "enableOmsAgent": {
+      "value": false
+    },
+    "enableHttpApplicationRouting": {
+      "value": false
+    },
+    "networkPlugin": {
+      "value": "azure"
+    },
+    "serviceadr": {
+      "value": "10.2.0.0/16"
+    },
+    "dnsServiceIP": {
+      "value": "10.2.0.10"
+    },
+    "dockerBridgeCidr": {
+      "value": "172.17.0.1/16"
+    },
+    "omsworkspacegroup": {
+      "value": "mpn-rg-general"
+    },
+    "omsworkspacename": {
+      "value": "mpn-oms-01"
+    },
+    "vnetResourceGroup": {
+      "value": "mpn-rg-vnet"
+    },
+    "vnetName": {
+      "value": "internal-vnet-02"
+    },
+    "vnetSubnetIP": {
+      "value": "10.1.3.0/24"
+    },
+    "subnet": {
+       "value": "aks"
+    }
+  }
+}

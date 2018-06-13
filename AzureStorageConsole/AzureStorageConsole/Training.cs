@@ -9,9 +9,12 @@ namespace AzureStorageConsole {
     class Training : TableEntity {
 
         public Training() {
+            this.PartitionKey = "3"";"
         }
 
         public string TrainingTest { get; set; }
+
+        public string Naam { get; set; }
 
     }
 }

@@ -1,0 +1,11 @@
+﻿{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hostingPlanName": { "value": "mpn-web-plan-01" },
+    "skuName": { "value": "B1" },
+    "skuCapacity": { "value": 1 },
+    "apiName": { "value": "mpn-web-01" },
+    "insightsName": { "value": "mpn-web-insights" }
+  }
+}

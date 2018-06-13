@@ -1,0 +1,30 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		"endpoint": {
+            "type": "string"
+        },
+	},
+    "resources": [
+        {
+            "type": "Microsoft.EventGrid/eventSubscriptions",
+            "name": "subscriptionevents",
+            "apiVersion": "2017-06-15-preview",
+            "properties": {
+                "destination": {
+                    "endpointType": "WebHook",
+                    "properties": {
+                        "endpointUrl": "[parameters('endpoint')]"
+                    }
+                },
+                "filter": {
+                    "subjectBeginsWith": "",
+                    "subjectEndsWith": "",
+                    "subjectIsCaseSensitive": false,
+                    "includedEventTypes": ["All"]
+                }
+            }
+        }
+    ]
+}

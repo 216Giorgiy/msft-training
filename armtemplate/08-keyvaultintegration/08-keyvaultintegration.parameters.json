@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminLogin": {
+            "value": "sqladmin"
+        },
+        "adminPassword": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/1fd221fd-5347-47fa-9fd6-fb4fa7f31251/resourceGroups/mpn-rg-keyvault/providers/Microsoft.KeyVault/vaults/mpnkeyvault01"
+              },
+              "secretName": "sqladminpassword"
+            }
+        },
+        "sqlServerName": {
+            "value": "sqlkeyvaultintegration01"
+        }
+    }
+}

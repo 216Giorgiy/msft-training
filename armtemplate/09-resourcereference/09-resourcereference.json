@@ -1,0 +1,98 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hostingPlanName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skuName": {
+      "type": "string",
+      "defaultValue": "F1",
+      "allowedValues": [ "F1", "D1", "B1", "B2", "B3", "S1", "S2", "S3", "P1", "P2", "P3", "P4" ]
+    },
+    "skuCapacity": {
+      "type": "int",
+      "defaultValue": 1,
+      "minValue": 1
+    },
+    "apiName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "insightsName": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('hostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "HostingPlan"
+      },
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "capacity": "[parameters('skuCapacity')]"
+      },
+      "properties": {
+        "name": "[parameters('hostingPlanName')]"
+      }
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('apiName')]",
+      "kind" :  "api",
+      "type": "Microsoft.Web/sites",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "Website"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "[concat('Microsoft.Insights/components/', parameters('insightsName'))]"
+      ],
+      "properties": {
+        "name": "[parameters('apiName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+        "siteConfig": {
+          "AlwaysOn": true
+        }
+      },
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', parameters('apiName'))]"
+          ],
+          "tags": {
+            "displayName": "AppSettings"
+          },
+          "properties": {
+            "InstrumentationKey": "[reference(concat('Microsoft.Insights/components/', parameters('insightsName'))).InstrumentationKey]"
+          }
+        }       
+      ]
+    },
+    {
+      "apiVersion": "2014-04-01",
+      "name": "[parameters('insightsName')]",
+      "type": "Microsoft.Insights/components",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [],
+      "tags": {
+        "displayName": "AppInsightsComponent"
+      },
+      "properties": {
+        "applicationId": "[parameters('apiName')]"
+      }
+    }
+  ]
+}
